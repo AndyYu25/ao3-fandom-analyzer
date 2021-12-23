@@ -167,41 +167,6 @@ class Fandom:
         return tagCount
 
 
-#session = AO3.GuestSession()
-session = AO3.Session("hydra1234", "me902978")
-minecraftAnalysis = Fandom('Men\'s Hockey RPF', session = session)
-
-
-def toCSV(inputDict: dict, fileName: str)->None:
-    """
-    Write dictionary to CSV with two columns corresponding to the key and value.
-    """
-    with open(fileName, 'w', encoding = 'utf-8-sig') as f:
-        for key in inputDict.keys():
-            f.write(f'{key},{inputDict[key]}\n')
-        f.close()
-
-with open('HockeyOverview.txt', 'w', encoding = 'utf-8-sig') as f:
-    f.write(minecraftAnalysis.getRatingComposition())
-    f.write(minecraftAnalysis.getWarningComposition())
-    f.close()
-
-
-
-#relationships = minecraftAnalysis.attributeCounter(type = 'relationships', sampleSize = 800, sortColumn = "hits", sortDirection = "desc")
-#toCSV(relationships, 'MinecraftRelationshipCounter.csv')
-
-#characters = minecraftAnalysis.attributeCounter(type = 'characters', sampleSize = 800, sortColumn = "hits", sortDirection = "desc")
-#toCSV(characters, 'MinecraftCharacterCounter.csv')
-
-#tags = minecraftAnalysis.attributeCounter(type = 'tags', sampleSize = 800, sortColumn = "hits", sortDirection = "desc")
-#toCSV(tags, 'MinecraftTagCounter.csv')
-
-"""
-potterAnalysis = Fandom('Harry Potter - J. K. Rowling')
-print(potterAnalysis.getRatingComposition())
-print(potterAnalysis.getWarningComposition())
-"""
 
 
 
