@@ -47,6 +47,9 @@ class Search:
         sort_column="",
         sort_direction="",
         revised_at="",
+        characters="",
+        relationships="",
+        tags="",
         session=None):
 
         self.any_field = any_field
@@ -68,6 +71,10 @@ class Search:
         self.sort_direction = sort_direction
         self.revised_at = revised_at
         
+        self.characters = characters
+        self.relationships = relationships
+        self.tags = tags
+
         self.session = session
 
         self.results = None
@@ -84,7 +91,8 @@ class Search:
             self.any_field, self.title, self.author, self.single_chapter,
             self.word_count, self.language, self.fandoms, self.rating, self.warnings, self.hits,
             self.bookmarks, self.comments, self.completion_status, self.crossover, self.page,
-            self.sort_column, self.sort_direction, self.revised_at, self.session)
+            self.sort_column, self.sort_direction, self.revised_at, self.characters, 
+            self.relationships, self.tags, self.session)
 
         results = soup.find("ol", {"class": ("work", "index", "group")})
         if results is None and soup.find("p", text="No results found. You may want to edit your search to make it less specific.") is not None:
@@ -124,6 +132,9 @@ def search(
     sort_column="",
     sort_direction="",
     revised_at="",
+    characters="",
+    relationships="",
+    tags="",
     session=None):
     """Returns the results page for the search as a Soup object
 
@@ -167,6 +178,12 @@ def search(
         query.add_field(f"work_search[language_id]={language}")
     if fandoms != "":
         query.add_field(f"work_search[fandom_names]={fandoms}")
+    if characters != "":
+        query.add_field(f"work_search[character_names]={characters}")
+    if relationships != "":
+        query.add_field(f"work_search[relationship_names]={relationships}")
+    if tags != "":
+        query.add_field(f"work_search[freeform_names]={tags}")
     if rating is not None:
         query.add_field(f"work_search[rating_ids]={rating}")
     if warnings is not None:
